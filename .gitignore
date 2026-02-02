@@ -27,4 +27,4 @@ output/
 .idea/
 
 # Env
-.env
+# .env
