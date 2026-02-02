@@ -1,0 +1,30 @@
+# Node
+node_modules/
+**/node_modules/
+
+# Build output
+dist/
+
+# Vite
+.vite/
+
+# Logs
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# OS
+.DS_Store
+
+# Generated
+store-front-template/
+staged-apps/
+output/
+
+
+# Editor
+.vscode/
+.idea/
+
+# Env
+.env

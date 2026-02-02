@@ -1,0 +1,232 @@
+<!doctype html>
+<!-- Shell HTML for the storefront builder UI (Vite entry). -->
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Storefront Builder · Staging</title>
+  </head>
+  <body class="min-h-screen">
+    <div id="auth-panel" class="mx-auto mt-4 max-w-6xl rounded-3xl border border-white/60 bg-white/70 p-4 shadow-soft">
+      <div class="flex flex-col gap-3 sm:flex-row sm:items-center sm:justify-between">
+        <div>
+          <p class="text-xs uppercase tracking-[0.25em] text-slate-500">Secure access</p>
+          <p class="text-sm text-slate-700">Sign in to continue.</p>
+        </div>
+        <div class="flex flex-col gap-2 sm:flex-row sm:items-center">
+          <div id="auth-user" class="hidden text-sm text-slate-700"></div>
+          <div id="auth-form" class="flex flex-col gap-2 sm:flex-row sm:items-center">
+            <button id="auth-send" class="rounded-xl bg-ink px-4 py-2 text-sm text-white">Sign in with Auth0</button>
+          </div>
+          <button id="auth-signout" class="hidden rounded-xl border border-slate-300 px-4 py-2 text-sm text-slate-700">Sign out</button>
+        </div>
+      </div>
+      <p id="auth-status" class="mt-2 text-xs text-slate-500"></p>
+    </div>
+
+    <div id="app-shell" class="min-h-screen px-6 py-6 lg:px-10">
+      <header class="flex flex-col gap-4 rounded-3xl border border-white/60 bg-white/70 p-6 shadow-soft lg:flex-row lg:items-center lg:justify-between">
+        <div class="flex items-center gap-6">
+          <div class="flex h-28 w-28 items-center justify-center rounded-3xl bg-ink text-white shadow-lift lg:h-32 lg:w-32">
+            <span class="heading-font text-4xl lg:text-5xl">SB</span>
+          </div>
+          <div>
+            <p class="text-xs uppercase tracking-[0.25em] text-slate-500">Storefront Builder</p>
+            <h1 class="heading-font text-2xl text-ink">Staging Flow</h1>
+          </div>
+        </div>
+        <div class="flex items-center gap-2 text-xs uppercase tracking-[0.25em] text-slate-500">
+          <span>Step</span>
+          <span id="step-label" class="rounded-full border border-slate-300 bg-white px-3 py-1 text-sm font-semibold text-ink">1</span>
+          <span>of 3</span>
+        </div>
+      </header>
+
+      <div class="mt-6 grid gap-4 md:grid-cols-[1fr_auto] md:items-center">
+        <div class="flex items-center gap-3">
+          <div class="h-2 w-20 rounded-full bg-ink" data-step-indicator="1"></div>
+          <div class="h-2 w-20 rounded-full bg-slate-200" data-step-indicator="2"></div>
+          <div class="h-2 w-20 rounded-full bg-slate-200" data-step-indicator="3"></div>
+        </div>
+        <div class="flex gap-3">
+          <button id="prev-btn" class="rounded-full border border-slate-300 px-4 py-2 text-sm text-slate-600 transition hover:border-slate-500">← Back</button>
+          <button id="next-btn" class="rounded-full bg-ink px-5 py-2 text-sm text-white transition">Continue →</button>
+        </div>
+      </div>
+
+      <main class="mt-6">
+        <section id="step-1" class="glass-panel fade-in rounded-3xl border border-white/60 p-6 shadow-soft" data-step>
+          <div class="flex flex-col gap-4">
+            <div class="flex flex-col gap-3 lg:flex-row lg:items-center lg:gap-6">
+              <div>
+              <p class="text-xs uppercase tracking-[0.25em] text-slate-400">Step 1</p>
+              <h2 class="heading-font text-2xl text-ink">Select Asset Package (DEMO)</h2>
+              </div>
+              <div class="flex items-center gap-3">
+              <div class="flex h-20 w-32 items-center justify-center rounded-xl border border-slate-200 bg-slate-50">
+                <img id="package-logo" class="max-h-16" alt="Package logo" />
+              </div>
+              <select id="asset-package" class="w-56 rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm">
+                <option value="bakery">Bakery</option>
+                <option value="rock_climbing">Rock Climbing</option>
+                <option value="fitness">Fitness</option>
+                <option value="cat_toys">Cat Toys</option>
+              </select>
+            </div>
+          </div>
+
+          <div class="mt-6 grid gap-4 md:grid-cols-2 xl:grid-cols-3">
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Logo</p>
+              <div class="mt-3 flex h-24 items-center justify-center rounded-xl border border-dashed border-slate-200 bg-slate-50">
+                <img id="board-logo" class="max-h-20 max-w-full object-contain" src="/bakery/logo.png" alt="Logo" />
+              </div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4 md:col-span-2">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Hero</p>
+              <div class="mt-3 flex h-56 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img id="board-hero" class="max-h-full w-full object-contain" src="/bakery/Hero.png" alt="Hero" />
+                <video id="board-hero-video" class="hidden max-h-full w-full object-contain" autoplay muted loop playsinline></video>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Product 1</p>
+              <div class="mt-3 flex h-40 items-center justify-center rounded-xl border border-slate-200 bg-slate-50">
+                <img id="board-product-1" class="max-h-full w-full object-contain" src="/bakery/product-1.png" alt="Product 1" />
+                <video id="board-product-1-video" class="hidden max-h-full w-full object-contain" autoplay muted loop playsinline></video>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Product 2</p>
+              <div class="mt-3 flex h-40 items-center justify-center rounded-xl border border-slate-200 bg-slate-50">
+                <img id="board-product-2" class="max-h-full w-full object-contain" src="/bakery/product-2.png" alt="Product 2" />
+                <video id="board-product-2-video" class="hidden max-h-full w-full object-contain" autoplay muted loop playsinline></video>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-400">Product 3</p>
+              <div class="mt-3 flex h-40 items-center justify-center rounded-xl border border-slate-200 bg-slate-50">
+                <img id="board-product-3" class="max-h-full w-full object-contain" src="/bakery/product-3.png" alt="Product 3" />
+                <video id="board-product-3-video" class="hidden max-h-full w-full object-contain" autoplay muted loop playsinline></video>
+              </div>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4 md:col-span-2">
+              <p class="text-xs uppercase tracking-[0.2em] text-slate-400">About</p>
+              <div class="mt-3 flex h-56 items-center justify-center overflow-hidden rounded-xl border border-slate-200 bg-slate-50">
+                <img id="board-about" class="max-h-full w-full object-contain" src="/bakery/about.png" alt="About" />
+                <video id="board-about-video" class="hidden max-h-full w-full object-contain" autoplay muted loop playsinline></video>
+              </div>
+            </div>
+          </div>
+        </section>
+
+        <section id="step-2" class="glass-panel hidden rounded-3xl border border-white/60 p-6 shadow-soft" data-step>
+          <div>
+            <p class="text-xs uppercase tracking-[0.25em] text-slate-400">Step 2</p>
+            <h2 class="heading-font text-2xl text-ink">Describe the Brand in Natural Language</h2>
+            <p class="mt-2 text-sm text-slate-600">Codex uses these prompts to decide layout, copy tone, product organization, and hero messaging.</p>
+          </div>
+
+          <div class="mt-6 grid gap-4 lg:grid-cols-2">
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <label class="text-xs uppercase tracking-[0.2em] text-slate-400">Brand Mission</label>
+              <select id="mission-select" class="mt-3 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm">
+                <option value="">Pick a mission (optional)</option>
+              </select>
+              <textarea id="prompt-mission" class="mt-3 h-28 w-full resize-none rounded-xl border border-slate-200 px-3 py-2 text-sm" placeholder="What do you stand for? What is the mission behind the brand?"></textarea>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <label class="text-xs uppercase tracking-[0.2em] text-slate-400">What Makes the Product Special</label>
+              <select id="special-select" class="mt-3 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm">
+                <option value="">Pick a statement (optional)</option>
+              </select>
+              <textarea id="prompt-special" class="mt-3 h-28 w-full resize-none rounded-xl border border-slate-200 px-3 py-2 text-sm" placeholder="Craft, materials, story, or experience that makes it unique."></textarea>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <label class="text-xs uppercase tracking-[0.2em] text-slate-400">UI Preferences</label>
+              <select id="ui-select" class="mt-3 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm">
+                <option value="">Pick a direction (optional)</option>
+              </select>
+              <textarea id="prompt-ui" class="mt-3 h-28 w-full resize-none rounded-xl border border-slate-200 px-3 py-2 text-sm" placeholder="Layout vibe, typography feel, spacing, color mood, etc."></textarea>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <label class="text-xs uppercase tracking-[0.2em] text-slate-400">Product Organization</label>
+              <select id="organization-select" class="mt-3 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm">
+                <option value="">Pick a structure (optional)</option>
+              </select>
+              <textarea id="prompt-organization" class="mt-3 h-28 w-full resize-none rounded-xl border border-slate-200 px-3 py-2 text-sm" placeholder="How should products be grouped or highlighted?"></textarea>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <label class="text-xs uppercase tracking-[0.2em] text-slate-400">Hero + Logo Messaging</label>
+              <select id="hero-select" class="mt-3 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm">
+                <option value="">Pick a tone (optional)</option>
+              </select>
+              <textarea id="prompt-hero" class="mt-3 h-28 w-full resize-none rounded-xl border border-slate-200 px-3 py-2 text-sm" placeholder="What should the hero headline say? Any notes about logo usage?"></textarea>
+            </div>
+            <div class="rounded-2xl border border-slate-200 bg-white p-4">
+              <label class="text-xs uppercase tracking-[0.2em] text-slate-400">Additional Notes</label>
+              <select id="notes-select" class="mt-3 w-full rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm">
+                <option value="">Pick a prompt (optional)</option>
+              </select>
+              <textarea id="prompt-notes" class="mt-3 h-28 w-full resize-none rounded-xl border border-slate-200 px-3 py-2 text-sm" placeholder="Anything else Codex should know before building the storefront."></textarea>
+            </div>
+          </div>
+        </section>
+
+        <section id="step-3" class="hidden" data-step>
+          <div class="glass-panel rounded-3xl border border-white/60 p-6 shadow-soft">
+            <div class="flex flex-col gap-4 lg:flex-row lg:items-center lg:gap-6">
+              <div>
+                <p class="text-xs uppercase tracking-[0.25em] text-slate-400">Step 3</p>
+                <h2 class="heading-font text-2xl text-ink">Build the Storefront</h2>
+                <p class="mt-2 text-sm text-slate-600">Codex will now create your customized Store Front. This may take a few minutes, good time for a coffee break ☕.</p>
+              </div>
+              <div class="flex flex-wrap items-center gap-3">
+                <button id="build-btn" class="rounded-full bg-ink px-5 py-2 text-sm text-white transition">Create Storefront</button>
+                <a id="codex-response-link" class="text-xs uppercase tracking-[0.2em] text-slate-500 underline" href="#" target="_blank" rel="noreferrer">
+                  CODEX RESPONSE
+                </a>
+                <div class="flex items-center gap-2">
+                  <select id="app-history" class="rounded-xl border border-slate-200 bg-white px-3 py-2 text-sm">
+                    <option value="">App History</option>
+                  </select>
+                  <button id="app-history-refresh" class="rounded-xl border border-slate-300 px-3 py-2 text-xs text-slate-600 transition hover:border-slate-500">Refresh</button>
+                  <button id="app-history-clear" class="rounded-xl border border-rose-200 px-3 py-2 text-xs text-rose-600 transition hover:border-rose-300">Clear List</button>
+                  <button id="app-history-purge" class="rounded-xl border border-rose-300 px-3 py-2 text-xs text-rose-700 transition hover:border-rose-400">Purge Apps</button>
+                </div>
+              </div>
+            </div>
+            <p id="mcp-status" class="mt-3 text-xs text-slate-500"></p>
+
+            <div class="mt-6 rounded-2xl border border-slate-200 bg-white p-4">
+              <label class="text-xs uppercase tracking-[0.2em] text-slate-400">Adjust the storefront (natural language)</label>
+              <div class="mt-3 flex flex-col gap-3 md:flex-row md:items-center">
+                <input id="adjust-input" class="w-full rounded-xl border border-slate-200 px-3 py-2 text-sm" placeholder="e.g., Make the hero text left-aligned and increase spacing between sections." />
+                <button id="adjust-btn" class="rounded-xl bg-ink px-4 py-2 text-sm text-white">Send</button>
+              </div>
+              <p class="mt-2 text-xs text-slate-500">This will send the adjustment prompt to the MCP server.</p>
+            </div>
+
+            <div class="mt-6 rounded-3xl border border-slate-200 bg-white p-4">
+              <div id="build-stage" class="build-stage is-idle relative w-full overflow-hidden rounded-2xl border border-dashed border-slate-200 bg-slate-50 text-sm text-slate-500">
+                <p id="build-placeholder">Storefront will render here.</p>
+                <iframe id="build-iframe" class="hidden build-iframe" title="Staged storefront" src="about:blank"></iframe>
+                <div id="build-loader" class="hidden absolute inset-0 flex flex-col items-center justify-center gap-3 bg-white/80">
+                  <div class="loader-lines" aria-hidden="true">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                  </div>
+                  <p class="text-xs uppercase tracking-[0.2em] text-slate-500">Generating…</p>
+                </div>
+              </div>
+            </div>
+          </div>
+        </section>
+      </main>
+    </div>
+    <script type="module" src="/main.js"></script>
+  </body>
+</html>
